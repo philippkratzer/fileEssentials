@@ -8,5 +8,6 @@ namespace FileEssentials.Model
 {
     class MainModel
     {
+        public Settings Settings { get; set; }
     }
 }

@@ -6,3 +6,6 @@ C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\bin\Debug\FileEssential
 C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\bin\Debug\FileEssentials.pdb
 C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\obj\Debug\FileEssentials.exe
 C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\obj\Debug\FileEssentials.pdb
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\bin\Debug\Newtonsoft.Json.dll
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\bin\Debug\Newtonsoft.Json.xml
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\obj\Debug\FileEssentials.View.FormMain.resources
