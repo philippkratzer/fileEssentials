@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FileEssentials.Controller;
+using FileEssentials.Model;
+using FileEssentials.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +19,12 @@ namespace FileEssentials
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var view = new FormMain();
+            var model = new MainModel();
+            var controller = new MainController(model, view);
+
+            controller.StartApplication();
         }
     }
 }

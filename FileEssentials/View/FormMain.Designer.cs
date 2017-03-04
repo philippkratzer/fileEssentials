@@ -1,6 +1,6 @@
-﻿namespace FileEssentials
+﻿namespace FileEssentials.View
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         /// Erforderliche Designervariable.

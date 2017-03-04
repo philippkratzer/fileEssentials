@@ -1,1 +1,8 @@
 C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\bin\Debug\FileEssentials.exe.config
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\obj\Debug\FileEssentials.csprojResolveAssemblyReference.cache
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\obj\Debug\FileEssentials.Properties.Resources.resources
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\obj\Debug\FileEssentials.csproj.GenerateResource.Cache
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\bin\Debug\FileEssentials.exe
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\bin\Debug\FileEssentials.pdb
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\obj\Debug\FileEssentials.exe
+C:\DATEN\REPOSITORY\PRIVAT\FileEssentials\FileEssentials\obj\Debug\FileEssentials.pdb
