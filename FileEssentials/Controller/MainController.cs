@@ -22,6 +22,7 @@ namespace FileEssentials.Controller
 
         public void StartApplication()
         {
+            Init();
             Application.Run(_view);
         }
 
@@ -33,10 +34,10 @@ namespace FileEssentials.Controller
 
         private void RegisterEvents()
         {
-            _view.ButtonExit.Click += ButtonExit_Click;
-            _view.ButtonLoad.Click += ButtonLoad_Click;
-            _view.ButtonSave.Click += ButtonSave_Click;
-            _view.ButtonStart.Click += ButtonStart_Click;
+            _view.ExitRequestEvent += ButtonExit_Click;
+            _view.LoadRequestEvent += ButtonLoad_Click;
+            _view.SaveRequestEvent += ButtonSave_Click;
+            _view.StartRequestEvent += ButtonStart_Click;
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)

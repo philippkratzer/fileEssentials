@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,10 @@ namespace FileEssentials.Model
 
         public static void DeserializeFile()
         {
-            Default = Deserialize(System.IO.File.ReadAllText(_defaultFilename));
+            if (File.Exists(_defaultFilename))
+                Default = Deserialize(System.IO.File.ReadAllText(_defaultFilename));
+            else
+                Default = new Settings();
         }
 
         public string PathPictures { get; set; }
@@ -40,7 +44,10 @@ namespace FileEssentials.Model
 
         public Settings()
         {
-
+            LongSideLength = 1024;
+            Blacklist = new List<string>();
+            PathPictures = @"C:\";
+            PathDestination = @"C:\";
         }
     }
 }

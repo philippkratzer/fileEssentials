@@ -121,6 +121,11 @@
             // numericUpDownSize
             // 
             this.numericUpDownSize.Location = new System.Drawing.Point(154, 109);
+            this.numericUpDownSize.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.numericUpDownSize.Minimum = new decimal(new int[] {
             1,
             0,
@@ -222,20 +227,23 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // label5
             // 

@@ -20,10 +20,10 @@ namespace FileEssentials.View
         public int AddedFiles { set { UpdateAddedFiles(value); } }
         public int SkippedFiles { set { UpdateSkippedFiles(value); } }
 
-        public ToolStripMenuItem ButtonLoad => loadToolStripMenuItem;
-        public ToolStripMenuItem ButtonSave => saveToolStripMenuItem;
-        public ToolStripMenuItem ButtonExit => exitToolStripMenuItem;
-        public Button ButtonStart => buttonStart;
+        public event EventHandler StartRequestEvent;
+        public event EventHandler LoadRequestEvent;
+        public event EventHandler SaveRequestEvent;
+        public event EventHandler ExitRequestEvent;
 
         public FormMain()
         {
@@ -88,6 +88,21 @@ namespace FileEssentials.View
             {
                 listBoxBlacklist.Items.RemoveAt(listBoxBlacklist.SelectedIndex);
             }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadRequestEvent?.Invoke(this, null);
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveRequestEvent?.Invoke(this, null);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExitRequestEvent?.Invoke(this, null);
         }
     }
 }
