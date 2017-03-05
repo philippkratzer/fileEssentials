@@ -1,4 +1,5 @@
 ﻿using FileEssentials.Model;
+using FileEssentials.Util.Log;
 using FileEssentials.View;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,9 @@ namespace FileEssentials.Controller
         {
             RegisterEvents();
             LoadSettings();
+
+            var pathLog = Path.Combine(System.Reflection.Assembly.GetEntryAssembly().Location, "Logs");
+            Logging.InitLogger(pathLog, 3);
         }
 
         private void RegisterEvents()
@@ -51,6 +55,7 @@ namespace FileEssentials.Controller
             }
             catch (Exception ex)
             {
+                Logging.Log($"Exception: {ex.Message}. Stacktrace: {ex.StackTrace}.", this, LoggingType.Error, 1);
                 MessageBox.Show($"Failed to process. Exception: {ex.Message}");
             }
         }

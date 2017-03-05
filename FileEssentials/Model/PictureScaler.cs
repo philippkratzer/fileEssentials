@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using FileEssentials.Util;
 using System.Drawing;
 using System.ComponentModel;
+using FileEssentials.Util.Log;
 
 namespace FileEssentials.Model
 {
@@ -68,7 +69,9 @@ namespace FileEssentials.Model
         public void Start()
         {
             Setup();
+            Logging.Log("Start.", this, LoggingType.Status, 1);
             ProcessPath(_pathPictures);
+            Logging.Log("End.", this, LoggingType.Status, 1);
         }
 
         private void ProcessPath(string path)
@@ -99,10 +102,12 @@ namespace FileEssentials.Model
             //Check if file is already processed.
             if (_fileOperation.FileExists(pathDest))
             {
+                Logging.Log($"SKIPPED: {path}", this, LoggingType.Status, 3);
                 FileSkippedEvent?.Invoke(this, ++_filesSkipped);
                 return;
             }
 
+            Logging.Log($"ADD: {path}", this, LoggingType.Status, 3);
             var pathTemp = Path.Combine(_pathTemp, fiSource.Name);
             var pathTempNew = Path.Combine(_pathTemp, fiSource.Name + "processed");
             try

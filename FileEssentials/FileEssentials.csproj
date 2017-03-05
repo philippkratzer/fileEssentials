@@ -56,6 +56,10 @@
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Util\FileOperationWrapper.cs" />
     <Compile Include="Util\ImageUtil.cs" />
+    <Compile Include="Util\Log\LogEventData.cs" />
+    <Compile Include="Util\Log\Logging.cs" />
+    <Compile Include="Util\Log\LoggingCache.cs" />
+    <Compile Include="Util\Log\LoggingType.cs" />
     <Compile Include="Util\NetworkShare.cs" />
     <Compile Include="View\FormMain.cs">
       <SubType>Form</SubType>
