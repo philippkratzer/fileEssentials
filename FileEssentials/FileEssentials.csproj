@@ -54,6 +54,9 @@
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\PictureScaler.cs" />
     <Compile Include="Model\Settings.cs" />
+    <Compile Include="Util\FileOperationWrapper.cs" />
+    <Compile Include="Util\ImageUtil.cs" />
+    <Compile Include="Util\NetworkShare.cs" />
     <Compile Include="View\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

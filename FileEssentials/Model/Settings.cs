@@ -42,6 +42,10 @@ namespace FileEssentials.Model
         public int LongSideLength { get; set; }
         public List<string> Blacklist { get; set; }
 
+        public string NasUser { get; set; }
+        public string NasPassword { get; set; }
+        public string NasDomain { get; set; }
+
         public Settings()
         {
             LongSideLength = 1024;

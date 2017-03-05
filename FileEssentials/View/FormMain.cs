@@ -104,5 +104,10 @@ namespace FileEssentials.View
         {
             ExitRequestEvent?.Invoke(this, null);
         }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            StartRequestEvent?.Invoke(this, null);
+        }
     }
 }

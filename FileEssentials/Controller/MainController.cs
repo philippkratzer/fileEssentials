@@ -44,16 +44,10 @@ namespace FileEssentials.Controller
         {
             try
             {
-                if (!Directory.Exists(_view.PathPictures))
-                    throw new Exception("The path to the pictures does not exist.");
-
-                if (!Directory.Exists(_view.PathDestination))
-                    Directory.CreateDirectory(_view.PathDestination);
-
                 PictureScaler scaler = new PictureScaler(_view.PathPictures, _view.PathDestination, _view.Blacklist, _view.LongSideLength);
                 scaler.FileAddedEvent += Scaler_FileAddedEvent;
                 scaler.FileSkippedEvent += Scaler_FileSkippedEvent;
-                scaler.Start();
+                scaler.StartAsync();
             }
             catch (Exception ex)
             {
