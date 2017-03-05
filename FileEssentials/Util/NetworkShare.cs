@@ -191,6 +191,38 @@ namespace FileEssentials.Util
             return result;
         }
 
+        public bool DirectoryExists(string Path)
+        {
+            return DirectoryExists(_user, _password, _domain, Path);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="password"></param>
+        /// <param name="domain"></param>
+        /// <param name="Path"></param>
+        /// <returns>true if directory exists</returns>
+        public bool DirectoryExists(string Username, string password, string domain, string Path)
+        {
+            Path = ConvertHostnameToIP(Path);
+
+            bool result = false;
+            using (WindowsImpersonationContext impersonatedUser = Login(Username, password, domain))
+            {
+                try
+                {
+                    result = Directory.Exists(Path);
+                }
+                finally
+                {
+                    impersonatedUser.Undo();
+                }
+            }
+            return result;
+        }
+
         public string GetExtension(string path, string filename)
         {
             return GetExtension(_user, _password, _domain, path, filename);

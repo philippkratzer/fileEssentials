@@ -88,36 +88,84 @@ namespace FileEssentials.Model
                 foreach (var dir in _fileOperation.GetDirectories(path))
                     ProcessPath(dir);
 
-                foreach (var file in _fileOperation.GetFiles(path))
-                    ProcessFile(file);
+                foreach (var file in GetFilesQueue(path))
+                {
+                    try
+                    {
+                        ProcessFile(file);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Log($"ERROR: {path}. Exception: {ex.Message}", this, LoggingType.Status, 3);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns a list of paths to files which have to be processed (unprocessed will be removed).
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private List<string> GetFilesQueue(string path)
+        {
+            List<string> list = new List<string>();
+
+            //get a list of files in src ...
+            var fiSource = new DirectoryInfo(path);
+            var relativeSrc = fiSource.FullName.Substring(_pathPictures.Length);
+            if (relativeSrc.StartsWith(@"\"))
+                relativeSrc = relativeSrc.Substring(1);
+
+            var pathDest = Path.Combine(_pathDestination, relativeSrc);
+
+            //get a list of files in dest.
+            var listSrc = _fileOperation.GetFiles(path);
+            var listDest = new List<string>();
+
+            if (_fileOperation.DirectoryExists(pathDest))
+                listDest = _fileOperation.GetFiles(pathDest);
+
+            var lookuptable = new HashSet<string>();
+            foreach (var file in listDest)
+            {
+                lookuptable.Add(new FileInfo(file).Name);
             }
 
+            //... and compare which files are already existing in dest
+            foreach (var file in listSrc)
+            {
+                var filenameSrc = new FileInfo(file);
+
+                if (filenameSrc.Extension.ToLower() != ".jpg" && filenameSrc.Extension.ToLower() != "jpeg")
+                    continue;
+
+                if (lookuptable.Contains(filenameSrc.Name))
+                {
+                    Logging.Log($"SKIPPED: {path}", this, LoggingType.Status, 3);
+                    FileSkippedEvent?.Invoke(this, ++_filesSkipped);
+                }
+                else
+                {
+                    list.Add(file);
+                }
+            }
+            return list;
         }
 
         private void ProcessFile(string path)
         {
             var fiSource = new FileInfo(path);
 
-            if (fiSource.Extension.ToLower() != ".jpg" && fiSource.Extension.ToLower() != "jpeg")
-                return;
+            Logging.Log($"ADD: {path}", this, LoggingType.Status, 3);
+            var pathTemp = Path.Combine(_pathTemp, fiSource.Name);
+            var pathTempNew = Path.Combine(_pathTemp, fiSource.Name + "processed");
 
             var relativeSrc = fiSource.DirectoryName.Substring(_pathPictures.Length);
             if (relativeSrc.StartsWith(@"\"))
                 relativeSrc = relativeSrc.Substring(1);
+            var pathDest = Path.Combine(_pathDestination, relativeSrc);
 
-            var pathDest = Path.Combine(_pathDestination, relativeSrc, fiSource.Name);
-
-            //Check if file is already processed.
-            if (_fileOperation.FileExists(pathDest))
-            {
-                Logging.Log($"SKIPPED: {path}", this, LoggingType.Status, 3);
-                FileSkippedEvent?.Invoke(this, ++_filesSkipped);
-                return;
-            }
-
-            Logging.Log($"ADD: {path}", this, LoggingType.Status, 3);
-            var pathTemp = Path.Combine(_pathTemp, fiSource.Name);
-            var pathTempNew = Path.Combine(_pathTemp, fiSource.Name + "processed");
             try
             {
                 //file needs to be processed. copy the file to a local dir
@@ -125,8 +173,8 @@ namespace FileEssentials.Model
 
                 ImageUtil.ResizeFile(pathTemp, pathTempNew, Settings.Default.LongSideLength);
 
-                var fiDestination = new FileInfo(pathDest);
-                _fileOperation.CreateDirectory(fiDestination.DirectoryName);
+                _fileOperation.CreateDirectory(pathDest);
+                pathDest = Path.Combine(pathDest, fiSource.Name);
                 _fileOperation.FileCopy(pathTempNew, pathDest);
             }
             finally

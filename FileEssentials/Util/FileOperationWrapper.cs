@@ -45,6 +45,14 @@ namespace FileEssentials.Util
                 return File.Exists(path);
         }
 
+        public bool DirectoryExists(string path)
+        {
+            if (path.StartsWith(@"\\"))
+                return _networkShare.DirectoryExists(path);
+            else
+                return Directory.Exists(path);
+        }
+
         public void FileCopy(string src, string dest)
         {
             if (src.StartsWith(@"\\") || dest.StartsWith(@"\\"))

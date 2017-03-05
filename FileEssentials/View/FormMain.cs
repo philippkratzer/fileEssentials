@@ -14,7 +14,15 @@ namespace FileEssentials.View
     {
         public string PathPictures { get { return textBoxPathPictures.Text; } set { textBoxPathPictures.Text = value; } }
         public string PathDestination { get { return textBoxPathDestination.Text; } set { textBoxPathDestination.Text = value; } }
-        public List<string> Blacklist { get { return listBoxBlacklist.Items.Cast<string>().ToList(); } set { listBoxBlacklist.DataSource = value; } }
+        public List<string> Blacklist
+        {
+            get { return listBoxBlacklist.Items.Cast<string>().ToList(); }
+            set
+            {
+                foreach (var item in value)
+                    listBoxBlacklist.Items.Add(item);
+            }
+        }
         public int LongSideLength { get { return (int)numericUpDownSize.Value; } set { numericUpDownSize.Value = value; } }
 
         public int AddedFiles { set { UpdateAddedFiles(value); } }
