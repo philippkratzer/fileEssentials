@@ -76,6 +76,13 @@ namespace FileEssentials.Model
 
         private void ProcessPath(string path)
         {
+            //check if path is blacklisted
+            if (_blacklist.FindIndex(x => x.Equals(path, StringComparison.InvariantCultureIgnoreCase)) >= 0)
+            {
+                Logging.Log($"BLACKLISTED: {path}", this, LoggingType.Status, 3);
+                return;
+            }
+
             if (_sourceIsNetworkShare)
             {
                 foreach (var dir in _fileOperation.GetDirectories(path))
@@ -84,6 +91,7 @@ namespace FileEssentials.Model
                 foreach (var file in _fileOperation.GetFiles(path))
                     ProcessFile(file);
             }
+
         }
 
         private void ProcessFile(string path)

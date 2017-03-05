@@ -32,7 +32,7 @@ namespace FileEssentials.Controller
             RegisterEvents();
             LoadSettings();
 
-            var pathLog = Path.Combine(System.Reflection.Assembly.GetEntryAssembly().Location, "Logs");
+            var pathLog = Path.Combine(new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName, "Logs");
             Logging.InitLogger(pathLog, 3);
         }
 
